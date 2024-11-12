@@ -152,13 +152,20 @@ const sumOfUnfundedGames = games.reduce((sum, game) => {
 }, 0);
 
 // create a string that explains the number of unfunded games using the ternary operator
-const description =
-  sumOfUnfundedGames === 1
-    ? "There is 1 unfunded game."
-    : `There are ${sumOfUnfundedGames} unfunded games.`;
+const description = `A total of $${sumOfAmount.toLocaleString()} has been raised for ${sumOfGames.toLocaleString()} ${
+  sumOfGames === 1 ? "game" : "games"
+}. Currently, ${
+  sumOfUnfundedGames === 0
+    ? "no games remain unfunded."
+    : `${sumOfUnfundedGames.toLocaleString()} ${
+        sumOfUnfundedGames === 1 ? "game remains" : "games remain"
+      } unfunded.`
+} We need your help to fund these amazing games!`;
 
 // create a new DOM element containing the template string and append it to the description container
-descriptionContainer.innerHTML = description;
+const newParagraph = document.createElement("p");
+newParagraph.textContent = description;
+descriptionContainer.appendChild(newParagraph);
 
 /************************************************************************************
  * Challenge 7: Select & display the top 2 games
